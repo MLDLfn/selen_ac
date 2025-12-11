@@ -1,0 +1,37 @@
+name: Windows Script and Python Example
+
+on: [push]
+
+jobs:
+  run-on-windows:
+    runs-on: windows-latest
+
+    steps:
+    # 1. Checkout 代碼
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    # 2. 執行 PowerShell 腳本
+    - name: Run a PowerShell script
+      run: |
+        Write-Host "Hello from Windows!"
+        # 確保腳本路徑正確
+        ./scripts/my-windows-script.ps1
+
+    # 3. 設置 Python 環境
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'  # 可根據需要修改版本
+
+    # 4. 安裝 Python 依賴
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt  # 確保 requirements.txt 存在
+
+    # 5. 執行 Python 腳本
+    - name: Run Python script
+      run: |
+        # 替換為你的 Python 腳本名稱
+        python your_script.py
