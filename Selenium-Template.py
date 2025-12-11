@@ -45,7 +45,7 @@ co = ChromiumOptions()
 co.set_argument("--no-sandbox")
 browser = Chromium(co)
 page = browser.latest_tab
-page.get("https://www.google.com")
+page.get("https://batdongan.com.vn")
 print(page.html)
 page.close()
 display.stop()
