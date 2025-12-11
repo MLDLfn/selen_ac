@@ -1,5 +1,11 @@
 import time
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,  
+    format='%(asctime)s - %(levelname)s - %(message)s', 
+)
 
 while True:
-  print(1)
-  time.sleep(3)
+    logging.info("record: 1")
+    time.sleep(3)
