@@ -12,11 +12,14 @@ jobs:
       uses: actions/checkout@v2
 
     # 2. 執行 PowerShell 腳本
+    - name: List files in the current directory
+      run: dir  # 列出當前目錄中的文件，確認腳本是否存在
+
     - name: Run a PowerShell script
       run: |
         Write-Host "Hello from Windows!"
-        # 確保腳本路徑正確
-        ./scripts/my-windows-script.ps1
+        # 設置 PowerShell 執行策略並執行腳本
+        powershell -ExecutionPolicy Bypass -File ./scripts/my-windows-script.ps1
 
     # 3. 設置 Python 環境
     - name: Set up Python
