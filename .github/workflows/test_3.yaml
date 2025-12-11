@@ -1,43 +1,31 @@
-name: Windows Script and Python Example
+name: Python CI on Windows
 
-on: [push]
+on:
+  push:
+    branches:
+      - main  # 在推送到 main 分支时触发
+  pull_request:
+    branches:
+      - main  # 在对 main 分支进行拉取请求时触发
 
 jobs:
-  run-on-windows:
-    runs-on: windows-latest
-
+  test:
+    runs-on: windows-latest  # 使用 Windows 环境
+    
     steps:
-    # 1. Checkout 代碼
-    - name: Checkout code
-      uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2  # 检出代码仓库
 
-    # 2. 執行 PowerShell 腳本
-    - name: List files in the current directory
-      run: dir  # 列出當前目錄的所有檔案
-
-    - name: List files in scripts folder
-      run: dir scripts  # 列出 scripts 資料夾中的檔案，檢查腳本是否存在
-
-    - name: Run PowerShell script
-      run: |
-        Write-Host "Hello from Windows!"
-        # 使用當前工作目錄的絕對路徑來執行腳本
-        powershell -ExecutionPolicy Bypass -File $PWD/scripts/my-windows-script.ps1
-
-    # 3. 設置 Python 環境
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v2
       with:
-        python-version: '3.9'  # 可根據需要修改版本
+        python-version: '3.9'  # 设置 Python 版本
 
-    # 4. 安裝 Python 依賴
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt  # 確保 requirements.txt 存在
+        python -m pip install --upgrade pip  # 更新 pip
+        pip install -r requirements.txt  # 安装依赖
 
-    # 5. 執行 Python 腳本
     - name: Run Python script
       run: |
-        # 替換為你的 Python 腳本名稱
-        python your_script.py
+        python script.py  # 运行你的 Python 脚本
