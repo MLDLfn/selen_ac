@@ -1,0 +1,21 @@
+name: Run cufl_cffi On GitHub Action
+on:
+  workflow_dispatch:
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out repo
+        uses: actions/checkout@v4
+      - name: Setting up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+      - name: Installing package list
+        run: apt list --installed    
+
+      - name: Installing all necessary packages
+        run: pip install curl_cffi
+
+      - name: Running the Python script
+        run: python main_2.py
